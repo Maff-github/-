@@ -209,10 +209,10 @@ for fi1 in range(0,135,45):
         Efimn=betamn*f1-alfamn*f2*exp1
         #print('Efimn=',Efimn)
         Efimn_abs=abs(Efimn)
-        print('Efmn_abs=',Efimn_abs)
-        print('betamn=',betamn)
-        print('alfamn=',alfamn)        
-        print()
+        #print('Efmn_abs=',Efimn_abs)
+        #print('betamn=',betamn)
+        #print('alfamn=',alfamn)        
+        #print()
 
         #Скалярное произведение радиус-вектора r, длиной 1, и вектора rmn:
         rmnr=a*(sin(th1*pi/180)*sin(th3*pi/180)*cos((fi1-fi2)*pi/180)+cos(th3*pi/180)
