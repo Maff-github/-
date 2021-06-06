@@ -57,7 +57,7 @@ def func_Amn(theta,theta1,thetamn,fi,fimn):
         #print('Избежали попадания в неопределенность, Amn считается без приращений')
         return Amn         
     except ZeroDivisionError:
-        print('Непределенность 0/0. Приращаем Тета, Тета",(Фи-Фиmn), Тетаmn')
+        #print('Непределенность 0/0. Приращаем Тета, Тета",(Фи-Фиmn), Тетаmn')
         #print('Ищем значения слева и справа, после чего берем среднее между ними')
         Amn_left=(cos((theta-d_small)*pi/180)*sin((thetamn-d_small)*pi/180)
         *cos(((fi-fimn)-d_small)*pi/180)-sin((theta-d_small)*pi/180)
