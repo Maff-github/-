@@ -156,7 +156,7 @@ for fi1 in range(0,135,45):
     print('Фи=',fi1)
     list_fi1.append(fi1)
     print()
-    for th3 in range(-90,91,10):
+    for th3 in range(-90,91,6):
         if fi1==0:
             list_th3_0.append(th3)
                        
@@ -204,12 +204,14 @@ for fi1 in range(0,135,45):
             #print('Efmn_abs=',Efimn_abs)
 
             #Скалярное произведение радиус-вектора r, длиной 1, и вектора rmn:
-            rmnr=a*(sin(th1)*sin(th3)*cos(fi1-fi2)+cos(th3)*cos(th1))
+            rmnr=a*(sin(th1*pi/180)*sin(th3*pi/180)*cos((fi1-fi2)*pi/180)+cos(th3*pi/180)
+                    *cos(th1*pi/180))
             #print('rmnr=',rmnr)
 
             #Фазовое распределение на элементах, которое нужно для формирования
             #остронаправленной ДН сферической АР:
-            r0=(sin(0)*sin(th3)*cos(0-fi2)+cos(th3)*cos(0))
+            r0=(sin(0*pi/180)*sin(th3*pi/180)*cos((0-fi2)*pi/180)+cos(th3*pi/180)
+                *cos(0*pi/180))
             psimn=k*a*r0
             #print('psimn=',psimn)
 
@@ -376,8 +378,9 @@ for fi1 in range(0,135,45):
 plt.show()
 #После рассчета всех функций для данного сечения начинается расчет следующего сечения
 
+   
 
-    
+
 
 
 
