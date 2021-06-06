@@ -36,7 +36,7 @@ print()
 Amn=1
 
 #p>=1
-p=1
+p=10
 #f1(theta,fi)= f2(theta,fi)
 #Вводим нормированную действительную амплитуду 1 (ДН элемента 1)
 def func_f1(theta1,fi):
@@ -57,7 +57,7 @@ def func_Amn(theta,theta1,thetamn,fi,fimn):
         #print('Избежали попадания в неопределенность, Amn считается без приращений')
         return Amn         
     except ZeroDivisionError:
-        #print('Непределенность 0/0. Приращаем Тета, Тета",(Фи-Фиmn), Тетаmn')
+        print('Непределенность 0/0. Приращаем Тета, Тета",(Фи-Фиmn), Тетаmn')
         #print('Ищем значения слева и справа, после чего берем среднее между ними')
         Amn_left=(cos((theta-d_small)*pi/180)*sin((thetamn-d_small)*pi/180)
         *cos(((fi-fimn)-d_small)*pi/180)-sin((theta-d_small)*pi/180)
@@ -209,15 +209,20 @@ for fi1 in range(0,135,45):
         Efimn=betamn*f1-alfamn*f2*exp1
         #print('Efimn=',Efimn)
         Efimn_abs=abs(Efimn)
-        #print('Efmn_abs=',Efimn_abs)
+        print('Efmn_abs=',Efimn_abs)
+        print('betamn=',betamn)
+        print('alfamn=',alfamn)        
+        print()
 
         #Скалярное произведение радиус-вектора r, длиной 1, и вектора rmn:
-        rmnr=a*(sin(th1)*sin(th3)*cos(fi1-fi2)+cos(th3)*cos(th1))
+        rmnr=a*(sin(th1*pi/180)*sin(th3*pi/180)*cos((fi1-fi2)*pi/180)+cos(th3*pi/180)
+                *cos(th1*pi/180))
         #print('rmnr=',rmnr)
 
         #Фазовое распределение на элементах, которое нужно для формирования
         #остронаправленной ДН сферической АР:
-        r0=(sin(0)*sin(th3)*cos(0-fi2)+cos(th3)*cos(0))
+        r0=(sin(0*pi/180)*sin(th3*pi/180)*cos((0-fi2)*pi/180)+cos(th3*pi/180)
+            *cos(0*pi/180))        
         psimn=k*a*r0
         #print('psimn=',psimn)
 
@@ -234,15 +239,13 @@ for fi1 in range(0,135,45):
         Efi1=Amn*exp(k*rmnr-psimn)*Efimn
         #print('Efi1=',Efi1)
         abs_Efi1=abs(Efi1)
-        #print('abs_Efi1=',abs_Efi1)
-        #print()
+        #print('abs_Efi1=',abs_Efi1)    
         
         #Из выведенной формулы (12)        
         try:            
             Etheta12=-Amn*f1*Bmn*exp(k*rmnr-psimn)*exp(-1j
                         *atan(1/ctgfi))*exp(-1j*atan(betamn/alfamn))                        
-        except ZeroDivisionError:
-            list_abs_Etheta12=[]
+        except ZeroDivisionError:            
             Etheta12=-Amn*f1*Bmn*exp(k*rmnr-psimn)*exp(-1j
                         *atan((1/(ctgfi-d_small)+1/(ctgfi+d_small))/2))*exp(-1j
                         *atan((betamn/(alfamn-d_small)+betamn/(alfamn+d_small))/2))
@@ -331,10 +334,10 @@ for fi1 in range(0,135,45):
             y_title_Efi1='abs_Efi1_0'
             y_title_Efi12='abs_Efi12_0'
             
-            top_title_Etheta1='Тетовая проекция формулы (1) сечения Фи=0 град'
-            top_title_Etheta12='Тетовая проекция формулы (12) сечения Фи=0 град'
-            top_title_Efi1='Фитовая проекция формулы (1) сечения Фи=0 град'
-            top_title_Efi12='Фитовая проекция формулы (12) сечения Фи=0 град'
+            top_title_Etheta1='Проекция по Тета формулы (1) сечения Фи=0 град'
+            top_title_Etheta12='Проекция по Тета формулы (12) сечения Фи=0 град'
+            top_title_Efi1='Проекция по Фи формулы (1) сечения Фи=0 град'
+            top_title_Efi12='Проекция по Фи формулы (12) сечения Фи=0 град'
         #Сечение Фи = 45 градусов:
         elif fi1==45:
             n=5
@@ -349,10 +352,10 @@ for fi1 in range(0,135,45):
             y_title_Efi1='abs_Efi1_45'
             y_title_Efi12='abs_Efi12_45'
             
-            top_title_Etheta1='Тетовая проекция формулы (1) сечения Фи=45 град'
-            top_title_Etheta12='Тетовая проекция формулы (12) сечения Фи=45 град'
-            top_title_Efi1='Фитовая проекция формулы (1) сечения Фи=45 град'
-            top_title_Efi12='Фитовая проекция формулы (12) сечения Фи=45 град'
+            top_title_Etheta1='Проекция по Тета формулы (1) сечения Фи=45 град'
+            top_title_Etheta12='Проекция по Тета формулы (12) сечения Фи=45 град'
+            top_title_Efi1='Проекция по Фи формулы (1) сечения Фи=45 град'
+            top_title_Efi12='Проекция по Фи формулы (12) сечения Фи=45 град'
         #Сечение Фи = 90 градусов:
         else:
             n=9
@@ -367,10 +370,10 @@ for fi1 in range(0,135,45):
             y_title_Efi1='abs_Efi1_90'
             y_title_Efi12='abs_Efi12_90'
             
-            top_title_Etheta1='Тетовая проекция формулы (1) сечения Фи=90 град'
-            top_title_Etheta12='Тетовая проекция формулы (12) сечения Фи=90 град'
-            top_title_Efi1='Фитовая проекция формулы (1) сечения Фи=90 град'
-            top_title_Efi12='Фитовая проекция формулы (12) сечения Фи=90 град'            
+            top_title_Etheta1='Проекция по Тета формулы (1) сечения Фи=90 град'
+            top_title_Etheta12='Проекция по Тета формулы (12) сечения Фи=90 град'
+            top_title_Efi1='Проекция по Фи формулы (1) сечения Фи=90 град'
+            top_title_Efi12='Проекция по Фи формулы (12) сечения Фи=90 град'            
 
         graphics(n,x,y,z,u,s,y_title_Etheta1,top_title_Etheta1,
                  y_title_Etheta12,top_title_Etheta12,top_title_Efi1,
@@ -378,6 +381,12 @@ for fi1 in range(0,135,45):
 
 plt.show()
 #После рассчета всех функций для данного сечения начинается расчет следующего сечения
+
+
+    
+
+
+
 
 
     
